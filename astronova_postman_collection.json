@@ -1,0 +1,187 @@
+{
+  "info": {
+    "_postman_id": "astronova-backend-api-v1",
+    "name": "Astronova Backend API (Core & Master Data)",
+    "description": "Postman Collection untuk testing urutan API Backend Developer 1: Departemen, Karyawan, Proyek, Tujuan, Kategori Pengeluaran, dan Pengeluaran Perjalanan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check Test",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/test",
+          "host": ["{{base_url}}"],
+          "path": ["test"]
+        }
+      }
+    },
+    {
+      "name": "2. Urutan 1 - Create Departemen",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama_departemen\": \"Operasional & Logistik\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/departemen",
+          "host": ["{{base_url}}"],
+          "path": ["departemen"]
+        }
+      }
+    },
+    {
+      "name": "3. Urutan 2 - Create Karyawan",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nik\": \"KRY-101\",\n  \"nama_lengkap\": \"Siti Rahmawati\",\n  \"email\": \"siti.rahma@astronova.co.id\",\n  \"telepon\": \"081377889900\",\n  \"id_departemen\": 1,\n  \"peran\": \"Operations Lead\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/karyawan",
+          "host": ["{{base_url}}"],
+          "path": ["karyawan"]
+        }
+      }
+    },
+    {
+      "name": "4. Urutan 3 - Create Proyek",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama_proyek\": \"Enterprise Resource Planning (ERP) Upgrade\",\n  \"kode_proyek\": \"PROJ-ERP-02\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/proyek",
+          "host": ["{{base_url}}"],
+          "path": ["proyek"]
+        }
+      }
+    },
+    {
+      "name": "5. Urutan 4 - Create Tujuan",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama_tujuan\": \"Kantor Cabang Bandung\",\n  \"kota\": \"Bandung\",\n  \"negara\": \"Indonesia\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/tujuan",
+          "host": ["{{base_url}}"],
+          "path": ["tujuan"]
+        }
+      }
+    },
+    {
+      "name": "6. Urutan 5 - Create Kategori",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama_kategori\": \"Internet & Komunikasi\",\n  \"deskripsi\": \"Biaya paket roaming dan pulsa komunikasi dinas.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/kategori-pengeluaran",
+          "host": ["{{base_url}}"],
+          "path": ["kategori-pengeluaran"]
+        }
+      }
+    },
+    {
+      "name": "7. Urutan 6 - Create Pengeluaran",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id_pengajuan\": 1,\n  \"id_kategori\": 1,\n  \"tanggal_pengeluaran\": \"2026-09-08\",\n  \"deskripsi\": \"Biaya taksi bandara menuju hotel\",\n  \"jumlah\": 175000,\n  \"metode_pembayaran\": \"Cash Reimburse\",\n  \"sudah_diganti\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/pengeluaran-perjalanan",
+          "host": ["{{base_url}}"],
+          "path": ["pengeluaran-perjalanan"]
+        }
+      }
+    },
+    {
+      "name": "8. Get All Departemen",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/departemen",
+          "host": ["{{base_url}}"],
+          "path": ["departemen"]
+        }
+      }
+    },
+    {
+      "name": "9. Get All Karyawan",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/karyawan",
+          "host": ["{{base_url}}"],
+          "path": ["karyawan"]
+        }
+      }
+    },
+    {
+      "name": "10. Get All Pengeluaran Perjalanan",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/pengeluaran-perjalanan",
+          "host": ["{{base_url}}"],
+          "path": ["pengeluaran-perjalanan"]
+        }
+      }
+    }
+  ]
+}

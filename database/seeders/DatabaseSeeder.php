@@ -15,11 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Admin / Test User
+        User::firstOrCreate(
+            ['email' => 'admin@astronova.co.id'],
+            [
+                'name' => 'Admin Astronova',
+                'password' => bcrypt('password123'),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Master Data Seeders
+        $this->call([
+            DepartemenSeeder::class,
+            KaryawanSeeder::class,
+            ProyekSeeder::class,
+            TujuanSeeder::class,
+            KategoriPengeluaranSeeder::class,
+            PengeluaranPerjalananSeeder::class,
         ]);
     }
 }
