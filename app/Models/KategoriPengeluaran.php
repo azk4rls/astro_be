@@ -11,6 +11,7 @@ class KategoriPengeluaran extends Model
     use HasFactory;
 
     protected $table = 'kategori_pengeluaran';
+
     protected $primaryKey = 'id_kategori';
 
     protected $fillable = [

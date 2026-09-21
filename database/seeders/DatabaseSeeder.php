@@ -32,6 +32,9 @@ class DatabaseSeeder extends Seeder
             TujuanSeeder::class,
             KategoriPengeluaranSeeder::class,
             PengeluaranPerjalananSeeder::class,
+            PengajuanPerjalananSeeder::class,
+            PengajuanPenggantianSeeder::class,
+            RiwayatPersetujuanSeeder::class,
         ]);
     }
 }

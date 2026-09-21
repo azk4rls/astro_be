@@ -8,6 +8,7 @@ use Tests\TestCase;
 class AstronovaMasterDataTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * Test sequence:
      * 1. Create Departemen

@@ -44,7 +44,7 @@ class DepartemenController extends BaseApiController
     {
         $departemen = Departemen::with('karyawan')->find($id);
 
-        if (!$departemen) {
+        if (! $departemen) {
             return $this->sendError('Departemen tidak ditemukan.', null, 404);
         }
 
@@ -61,7 +61,7 @@ class DepartemenController extends BaseApiController
     {
         $departemen = Departemen::find($id);
 
-        if (!$departemen) {
+        if (! $departemen) {
             return $this->sendError('Departemen tidak ditemukan.', null, 404);
         }
 
@@ -80,7 +80,7 @@ class DepartemenController extends BaseApiController
     {
         $departemen = Departemen::find($id);
 
-        if (!$departemen) {
+        if (! $departemen) {
             return $this->sendError('Departemen tidak ditemukan.', null, 404);
         }
 

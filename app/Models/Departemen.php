@@ -11,6 +11,7 @@ class Departemen extends Model
     use HasFactory;
 
     protected $table = 'departemen';
+
     protected $primaryKey = 'id_departemen';
 
     protected $fillable = [

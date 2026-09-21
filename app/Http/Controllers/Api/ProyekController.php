@@ -44,7 +44,7 @@ class ProyekController extends BaseApiController
     {
         $proyek = Proyek::find($id);
 
-        if (!$proyek) {
+        if (! $proyek) {
             return $this->sendError('Proyek tidak ditemukan.', null, 404);
         }
 
@@ -61,7 +61,7 @@ class ProyekController extends BaseApiController
     {
         $proyek = Proyek::find($id);
 
-        if (!$proyek) {
+        if (! $proyek) {
             return $this->sendError('Proyek tidak ditemukan.', null, 404);
         }
 
@@ -80,7 +80,7 @@ class ProyekController extends BaseApiController
     {
         $proyek = Proyek::find($id);
 
-        if (!$proyek) {
+        if (! $proyek) {
             return $this->sendError('Proyek tidak ditemukan.', null, 404);
         }
 
