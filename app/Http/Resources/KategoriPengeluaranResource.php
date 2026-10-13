@@ -18,6 +18,7 @@ class KategoriPengeluaranResource extends JsonResource
             'id_kategori' => $this->id_kategori,
             'nama_kategori' => $this->nama_kategori,
             'deskripsi' => $this->deskripsi,
+            'pengeluaran_perjalanan_count' => $this->whenCounted('pengeluaranPerjalanan'),
             'pengeluaran_perjalanan' => PengeluaranPerjalananResource::collection($this->whenLoaded('pengeluaranPerjalanan')),
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),

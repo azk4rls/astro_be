@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AstronovaMasterDataTest extends TestCase
@@ -20,6 +22,8 @@ class AstronovaMasterDataTest extends TestCase
      */
     public function test_api_sequence_creation_and_standard_responses(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         // 1. Create Departemen
         $deptResponse = $this->postJson('/api/departemen', [
             'nama_departemen' => 'Human Capital & General Affairs',
@@ -170,6 +174,8 @@ class AstronovaMasterDataTest extends TestCase
      */
     public function test_validation_error_standard_response(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $response = $this->postJson('/api/departemen', []);
 
         $response->assertStatus(422)
@@ -190,6 +196,8 @@ class AstronovaMasterDataTest extends TestCase
      */
     public function test_not_found_standard_response(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $response = $this->getJson('/api/departemen/999999');
 
         $response->assertStatus(404)

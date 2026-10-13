@@ -84,6 +84,10 @@ class KategoriPengeluaranController extends BaseApiController
             return $this->sendError('Kategori pengeluaran tidak ditemukan.', null, 404);
         }
 
+        if ($kategori->pengeluaranPerjalanan()->exists()) {
+            return $this->sendError('Kategori pengeluaran tidak dapat dihapus karena masih digunakan oleh data pengeluaran.', null, 409);
+        }
+
         $kategori->delete();
 
         return $this->sendSuccess(

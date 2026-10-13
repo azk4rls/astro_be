@@ -84,6 +84,10 @@ class DepartemenController extends BaseApiController
             return $this->sendError('Departemen tidak ditemukan.', null, 404);
         }
 
+        if ($departemen->karyawan()->exists()) {
+            return $this->sendError('Departemen tidak dapat dihapus karena masih memiliki karyawan.', null, 409);
+        }
+
         $departemen->delete();
 
         return $this->sendSuccess(

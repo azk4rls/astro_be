@@ -9,7 +9,9 @@ use App\Models\KategoriPengeluaran;
 use App\Models\PengajuanPenggantian;
 use App\Models\PengajuanPerjalananTugas;
 use App\Models\Tujuan;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class PengajuanPenggantianTest extends TestCase
@@ -20,6 +22,7 @@ class PengajuanPenggantianTest extends TestCase
     {
         parent::setUp();
         $this->seed();
+        Sanctum::actingAs(User::factory()->create());
     }
 
     public function test_can_list_pengajuan_penggantian(): void
