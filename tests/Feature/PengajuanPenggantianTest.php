@@ -163,6 +163,7 @@ class PengajuanPenggantianTest extends TestCase
     {
         $karyawan = Karyawan::first();
         $tujuan = Tujuan::first();
+        $kategoriId = KategoriPengeluaran::query()->value('id_kategori');
 
         // Create DRAFT pengajuan
         $pengajuan = PengajuanPerjalananTugas::create([
@@ -180,7 +181,7 @@ class PengajuanPenggantianTest extends TestCase
             'tanggal_pengajuan' => '2026-10-05',
             'details' => [
                 [
-                    'id_kategori' => 1,
+                    'id_kategori' => $kategoriId,
                     'tanggal_pengeluaran' => '2026-10-02',
                     'jumlah' => 500000.00,
                 ],
@@ -199,13 +200,14 @@ class PengajuanPenggantianTest extends TestCase
     public function test_cannot_create_duplicate_reimbursement_for_same_pengajuan(): void
     {
         $existing = PengajuanPenggantian::first();
+        $kategoriId = KategoriPengeluaran::query()->value('id_kategori');
 
         $payload = [
             'id_pengajuan' => $existing->id_pengajuan,
             'tanggal_pengajuan' => '2026-10-05',
             'details' => [
                 [
-                    'id_kategori' => 1,
+                    'id_kategori' => $kategoriId,
                     'tanggal_pengeluaran' => '2026-10-02',
                     'jumlah' => 500000.00,
                 ],

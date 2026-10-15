@@ -49,6 +49,8 @@ class AuthTest extends TestCase
                         'id',
                         'name',
                         'email',
+                        'role',
+                        'jabatan',
                     ],
                 ],
             ])
@@ -58,6 +60,23 @@ class AuthTest extends TestCase
                     'token_type' => 'Bearer',
                 ],
             ]);
+    }
+
+    public function test_login_returns_user_role(): void
+    {
+        User::factory()->create([
+            'email' => 'manager@astronova.co.id',
+            'password' => bcrypt('password123'),
+            'role' => 'atasan',
+        ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => 'manager@astronova.co.id',
+            'password' => 'password123',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('data.user.role', 'atasan');
     }
 
     public function test_login_failed_returns_401(): void

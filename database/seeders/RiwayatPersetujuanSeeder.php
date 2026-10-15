@@ -8,6 +8,7 @@ use App\Enums\StatusPenggantianEnum;
 use App\Models\PengajuanPenggantian;
 use App\Models\PengajuanPerjalananTugas;
 use App\Models\RiwayatPersetujuan;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class RiwayatPersetujuanSeeder extends Seeder
@@ -17,6 +18,10 @@ class RiwayatPersetujuanSeeder extends Seeder
      */
     public function run(): void
     {
+        $approver = User::query()->orderBy('id')->first();
+        $approverId = $approver?->id;
+        $approverName = $approver?->name ?? 'Admin Astronova';
+
         // Ambil pengajuan perjalanan yang berstatus menunggu_persetujuan
         $pengajuanPerjalanan = PengajuanPerjalananTugas::where('status', StatusPengajuanEnum::MENUNGGU_PERSETUJUAN->value)->first();
 
@@ -29,8 +34,8 @@ class RiwayatPersetujuanSeeder extends Seeder
                     'status' => ActionPersetujuanEnum::DISETUJUI->value,
                 ],
                 [
-                    'id_user' => 1,
-                    'nama_approver' => 'Admin Astronova',
+                    'id_user' => $approverId,
+                    'nama_approver' => $approverName,
                     'peran_approver' => 'Manager',
                     'catatan' => 'Pengajuan perjalanan dinas disetujui oleh manager.',
                     'approved_at' => now(),
@@ -53,8 +58,8 @@ class RiwayatPersetujuanSeeder extends Seeder
                     'status' => ActionPersetujuanEnum::DITOLAK->value,
                 ],
                 [
-                    'id_user' => 1,
-                    'nama_approver' => 'Admin Astronova',
+                    'id_user' => $approverId,
+                    'nama_approver' => $approverName,
                     'peran_approver' => 'Manager',
                     'catatan' => 'Bukti struk belum lengkap, mohon dilengkapi terlebih dahulu.',
                     'approved_at' => now(),
