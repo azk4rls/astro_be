@@ -44,7 +44,7 @@ class KategoriPengeluaranController extends BaseApiController
     {
         $kategori = KategoriPengeluaran::with('pengeluaranPerjalanan')->find($id);
 
-        if (!$kategori) {
+        if (! $kategori) {
             return $this->sendError('Kategori pengeluaran tidak ditemukan.', null, 404);
         }
 
@@ -61,7 +61,7 @@ class KategoriPengeluaranController extends BaseApiController
     {
         $kategori = KategoriPengeluaran::find($id);
 
-        if (!$kategori) {
+        if (! $kategori) {
             return $this->sendError('Kategori pengeluaran tidak ditemukan.', null, 404);
         }
 
@@ -80,8 +80,12 @@ class KategoriPengeluaranController extends BaseApiController
     {
         $kategori = KategoriPengeluaran::find($id);
 
-        if (!$kategori) {
+        if (! $kategori) {
             return $this->sendError('Kategori pengeluaran tidak ditemukan.', null, 404);
+        }
+
+        if ($kategori->pengeluaranPerjalanan()->exists()) {
+            return $this->sendError('Kategori pengeluaran tidak dapat dihapus karena masih digunakan oleh data pengeluaran.', null, 409);
         }
 
         $kategori->delete();

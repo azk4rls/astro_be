@@ -44,7 +44,7 @@ class TujuanController extends BaseApiController
     {
         $tujuan = Tujuan::find($id);
 
-        if (!$tujuan) {
+        if (! $tujuan) {
             return $this->sendError('Tujuan tidak ditemukan.', null, 404);
         }
 
@@ -61,7 +61,7 @@ class TujuanController extends BaseApiController
     {
         $tujuan = Tujuan::find($id);
 
-        if (!$tujuan) {
+        if (! $tujuan) {
             return $this->sendError('Tujuan tidak ditemukan.', null, 404);
         }
 
@@ -80,7 +80,7 @@ class TujuanController extends BaseApiController
     {
         $tujuan = Tujuan::find($id);
 
-        if (!$tujuan) {
+        if (! $tujuan) {
             return $this->sendError('Tujuan tidak ditemukan.', null, 404);
         }
 

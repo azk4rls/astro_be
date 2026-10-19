@@ -17,6 +17,7 @@ class DepartemenResource extends JsonResource
         return [
             'id_departemen' => $this->id_departemen,
             'nama_departemen' => $this->nama_departemen,
+            'karyawan_count' => $this->whenCounted('karyawan'),
             'karyawan' => KaryawanResource::collection($this->whenLoaded('karyawan')),
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),

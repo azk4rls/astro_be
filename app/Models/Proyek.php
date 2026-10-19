@@ -10,6 +10,7 @@ class Proyek extends Model
     use HasFactory;
 
     protected $table = 'proyek';
+
     protected $primaryKey = 'id_proyek';
 
     protected $fillable = [

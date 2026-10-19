@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class PengeluaranPerjalananResource extends JsonResource
             'id_pengajuan' => $this->id_pengajuan,
             'id_kategori' => $this->id_kategori,
             'kategori' => new KategoriPengeluaranResource($this->whenLoaded('kategori')),
-            'tanggal_pengeluaran' => $this->tanggal_pengeluaran instanceof \Carbon\CarbonInterface
+            'tanggal_pengeluaran' => $this->tanggal_pengeluaran instanceof CarbonInterface
                 ? $this->tanggal_pengeluaran->format('Y-m-d')
                 : $this->tanggal_pengeluaran,
             'deskripsi' => $this->deskripsi,

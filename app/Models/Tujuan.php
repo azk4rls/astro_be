@@ -10,6 +10,7 @@ class Tujuan extends Model
     use HasFactory;
 
     protected $table = 'tujuan';
+
     protected $primaryKey = 'id_tujuan';
 
     protected $fillable = [

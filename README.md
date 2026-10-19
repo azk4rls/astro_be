@@ -41,6 +41,41 @@ php artisan boost:install
 
 Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
+## Setup Database Lokal
+
+File database SQLite lokal (`astronova`, sesuai `DB_DATABASE` di `.env`) tidak dilacak git. Setelah pull/clone, buat database lokal dengan:
+
+```bash
+touch astronova && php artisan migrate --seed
+```
+
+## Autentikasi
+
+Seluruh endpoint `/api/*` (kecuali `GET /api/test` dan `POST /api/login`) dilindungi middleware `auth:sanctum` memakai bearer token Laravel Sanctum (kedaluwarsa 1440 menit / 24 jam). Tanpa token yang valid, API mengembalikan `401 {"success": false, "message": "Unauthenticated. Sertakan bearer token yang valid.", "errors": {}}`.
+
+Login untuk mendapatkan token:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/login \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "admin@astronova.co.id", "password": "password123"}'
+```
+
+Respons `data` berisi `token`, `token_type: "Bearer"`, dan `user`. Akun seeder bawaan: `admin@astronova.co.id` / `password123` (lihat `DatabaseSeeder`).
+
+Pakai token di setiap request berikutnya:
+
+```bash
+curl http://127.0.0.1:8000/api/me \
+  -H "Accept: application/json" \
+  -H "Authorization: Bearer <token>"
+```
+
+Logout (`POST /api/logout`) menghapus token yang sedang dipakai sehingga tidak bisa digunakan lagi. Di Postman, jalankan request `0a. Auth - Login` — token tersimpan otomatis ke variabel collection `{{token}}` dan dipakai sebagai auth Bearer collection.
+
+> **Peringatan keamanan:** akun seeder `admin@astronova.co.id` / `password123` hanya untuk development dan wajib diganti di produksi. Pastikan juga `APP_DEBUG=false` di luar environment lokal agar detail error tidak bocor ke respons.
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).

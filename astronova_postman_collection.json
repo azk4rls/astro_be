@@ -10,8 +10,23 @@
       "key": "base_url",
       "value": "http://127.0.0.1:8000/api",
       "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
     }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
   "item": [
     {
       "name": "1. Health Check Test",
@@ -24,6 +39,67 @@
           "raw": "{{base_url}}/test",
           "host": ["{{base_url}}"],
           "path": ["test"]
+        }
+      }
+    },
+    {
+      "name": "0a. Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@astronova.co.id\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": ["{{base_url}}"],
+          "path": ["login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.data && json.data.token) {",
+              "    pm.collectionVariables.set(\"token\", json.data.token);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "0b. Auth - Me",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/me",
+          "host": ["{{base_url}}"],
+          "path": ["me"]
+        }
+      }
+    },
+    {
+      "name": "0c. Auth - Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/logout",
+          "host": ["{{base_url}}"],
+          "path": ["logout"]
         }
       }
     },

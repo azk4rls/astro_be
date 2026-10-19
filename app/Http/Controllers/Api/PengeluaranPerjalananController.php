@@ -45,7 +45,7 @@ class PengeluaranPerjalananController extends BaseApiController
     {
         $pengeluaran = PengeluaranPerjalanan::with('kategori')->find($id);
 
-        if (!$pengeluaran) {
+        if (! $pengeluaran) {
             return $this->sendError('Pengeluaran perjalanan tidak ditemukan.', null, 404);
         }
 
@@ -62,7 +62,7 @@ class PengeluaranPerjalananController extends BaseApiController
     {
         $pengeluaran = PengeluaranPerjalanan::find($id);
 
-        if (!$pengeluaran) {
+        if (! $pengeluaran) {
             return $this->sendError('Pengeluaran perjalanan tidak ditemukan.', null, 404);
         }
 
@@ -82,7 +82,7 @@ class PengeluaranPerjalananController extends BaseApiController
     {
         $pengeluaran = PengeluaranPerjalanan::find($id);
 
-        if (!$pengeluaran) {
+        if (! $pengeluaran) {
             return $this->sendError('Pengeluaran perjalanan tidak ditemukan.', null, 404);
         }
 

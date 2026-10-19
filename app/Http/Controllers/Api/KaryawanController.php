@@ -45,7 +45,7 @@ class KaryawanController extends BaseApiController
     {
         $karyawan = Karyawan::with('departemen')->find($id);
 
-        if (!$karyawan) {
+        if (! $karyawan) {
             return $this->sendError('Karyawan tidak ditemukan.', null, 404);
         }
 
@@ -62,7 +62,7 @@ class KaryawanController extends BaseApiController
     {
         $karyawan = Karyawan::find($id);
 
-        if (!$karyawan) {
+        if (! $karyawan) {
             return $this->sendError('Karyawan tidak ditemukan.', null, 404);
         }
 
@@ -82,7 +82,7 @@ class KaryawanController extends BaseApiController
     {
         $karyawan = Karyawan::find($id);
 
-        if (!$karyawan) {
+        if (! $karyawan) {
             return $this->sendError('Karyawan tidak ditemukan.', null, 404);
         }
 
