@@ -21,8 +21,8 @@ Sebelum dilakukan proses audit dan perbaikan menyeluruh:
    `PengeluaranPerjalananController::index` mengambil semua data tanpa kemampuan query filtering berdasarkan `id_pengajuan`, `id_kategori`, `sudah_diganti`, maupun pencarian teks.
 4. **Relasi Balik (Bidirectional) Eloquent Belum Lengkap:**  
    Model `PengajuanPerjalananTugas` belum mendefinisikan relasi ke `itineraries`, `bookings`, `uangMuka`, dan `settlements`. Begitu pula model `User` belum memetakan relasi ke `notifikasi`, `delegasi`, `logAudit`, dan `riwayatPersetujuan`.
-5. **Halaman Frontend Bawaan (`welcome.blade.php`):**  
-   Hanya menampilkan template default framework tanpa integrasi interaktif ke database maupun endpoint backend yang ada.
+5. **Penetapan Pure Headless REST API (Tanpa UI Blade):**  
+   Seluruh antarmuka web Blade (`welcome.blade.php`) telah dihapus secara total. Root endpoint (`/`) kini mengembalikan respons JSON terstandarisasi yang berisi status kesiapan operasional backend dan direktori endpoint API. Semua data runtime bersumber 100% dari tabel database MySQL persisten.
 
 ---
 
@@ -87,8 +87,9 @@ Berdasarkan audit riil terhadap source code:
      - `GET /api/laporan/reimbursement`: Laporan klaim reimbursement beserta klasifikasi kondisi keuangan.
 6. **Pendaftaran Route Baru di `routes/api.php`:**
    - Mendaftarkan rute dashboard dan laporan di bawah middleware `auth:sanctum`.
-7. **Penyediaan Antarmuka Live Portal (`resources/views/welcome.blade.php`):**
-   - Mengganti splash screen statis default framework menjadi **Live Interactive Backend Console** yang terhubung langsung ke API `/api/*` dan database MySQL, menampilkan metrik live dan formulir simulasi data.
+7. **Penghapusan Seluruh UI & Penetapan Pure JSON Root Endpoint:**
+   - Menghapus berkas UI `welcome.blade.php` dan mengonfigurasi root route `/` agar mengembalikan respons JSON terstandarisasi yang memuat indeks direktori seluruh endpoint API.
+   - Mengoptimalkan seluruh seeder (18 database seeder) dengan data korporat riil dan koheren di database MySQL.
 8. **Pengembangan Unit & Feature Test:**
    - Membuat `tests/Feature/DashboardTest.php` (4 skenario pengujian).
    - Membuat `tests/Feature/LaporanTest.php` (5 skenario pengujian).

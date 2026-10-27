@@ -14,46 +14,47 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $ti = Departemen::where('nama_departemen', 'Teknologi Informasi')->first();
-        $keuangan = Departemen::where('nama_departemen', 'Keuangan')->first();
+        $keuangan = Departemen::where('nama_departemen', 'like', 'Keuangan%')->first();
+        $operasional = Departemen::where('nama_departemen', 'like', 'Operasional%')->first();
 
         $accounts = [
             [
                 'email' => 'staff@astronova.co.id',
-                'name' => 'Staff Astronova',
+                'name' => 'Rian Pratama',
                 'role' => 'karyawan',
-                'jabatan' => 'Software Engineer',
+                'jabatan' => 'Senior Software Engineer',
                 'nik' => 'USR-001',
                 'id_departemen' => $ti?->id_departemen,
             ],
             [
                 'email' => 'manager@astronova.co.id',
-                'name' => 'Manager Astronova',
+                'name' => 'Dian Permata',
                 'role' => 'atasan',
-                'jabatan' => 'Manager Operasional',
+                'jabatan' => 'Operations & IT Manager',
                 'nik' => 'USR-002',
-                'id_departemen' => $ti?->id_departemen,
+                'id_departemen' => $operasional?->id_departemen ?? $ti?->id_departemen,
             ],
             [
                 'email' => 'finance@astronova.co.id',
-                'name' => 'Finance Astronova',
+                'name' => 'Maya Lestari',
                 'role' => 'finance',
-                'jabatan' => 'Finance Officer',
+                'jabatan' => 'Senior Finance Officer',
                 'nik' => 'USR-003',
                 'id_departemen' => $keuangan?->id_departemen,
             ],
             [
                 'email' => 'travel@astronova.co.id',
-                'name' => 'Travel Admin Astronova',
+                'name' => 'Bambang Sudiro',
                 'role' => 'admin-travel',
-                'jabatan' => 'Admin Travel',
+                'jabatan' => 'Corporate Travel Administrator',
                 'nik' => 'USR-004',
-                'id_departemen' => $ti?->id_departemen,
+                'id_departemen' => $operasional?->id_departemen ?? $ti?->id_departemen,
             ],
             [
                 'email' => 'admin@astronova.co.id',
-                'name' => 'Super Admin Astronova',
+                'name' => 'Super Administrator',
                 'role' => 'superadmin',
-                'jabatan' => 'Super Admin',
+                'jabatan' => 'Head of Technology & Systems',
                 'nik' => 'USR-005',
                 'id_departemen' => $ti?->id_departemen,
             ],

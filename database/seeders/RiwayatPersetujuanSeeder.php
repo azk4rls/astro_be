@@ -18,9 +18,9 @@ class RiwayatPersetujuanSeeder extends Seeder
      */
     public function run(): void
     {
-        $approver = User::query()->orderBy('id')->first();
+        $approver = User::where('role', 'atasan')->first() ?? User::query()->orderBy('id')->first();
         $approverId = $approver?->id;
-        $approverName = $approver?->name ?? 'Admin Astronova';
+        $approverName = $approver?->name ?? 'Dian Permata';
 
         // Ambil pengajuan perjalanan yang berstatus menunggu_persetujuan
         $pengajuanPerjalanan = PengajuanPerjalananTugas::where('status', StatusPengajuanEnum::MENUNGGU_PERSETUJUAN->value)->first();

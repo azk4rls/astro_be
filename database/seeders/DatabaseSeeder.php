@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             ProyekSeeder::class,
             TujuanSeeder::class,
             KategoriPengeluaranSeeder::class,
-            PengeluaranPerjalananSeeder::class,
             PengajuanPerjalananSeeder::class,
+            PengeluaranPerjalananSeeder::class,
             PengajuanPenggantianSeeder::class,
             RiwayatPersetujuanSeeder::class,
             // Modul Operasional Tambahan

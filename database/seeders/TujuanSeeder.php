@@ -12,12 +12,23 @@ class TujuanSeeder extends Seeder
      */
     public function run(): void
     {
-        Tujuan::firstOrCreate(
-            ['nama_tujuan' => 'Surabaya'],
-            [
-                'kota' => 'Surabaya',
-                'negara' => 'Indonesia',
-            ]
-        );
+        $destinations = [
+            ['nama_tujuan' => 'Surabaya', 'kota' => 'Surabaya', 'negara' => 'Indonesia'],
+            ['nama_tujuan' => 'Bandung', 'kota' => 'Bandung', 'negara' => 'Indonesia'],
+            ['nama_tujuan' => 'Denpasar', 'kota' => 'Denpasar', 'negara' => 'Indonesia'],
+            ['nama_tujuan' => 'Yogyakarta', 'kota' => 'Yogyakarta', 'negara' => 'Indonesia'],
+            ['nama_tujuan' => 'Balikpapan', 'kota' => 'Balikpapan', 'negara' => 'Indonesia'],
+            ['nama_tujuan' => 'Medan', 'kota' => 'Medan', 'negara' => 'Indonesia'],
+        ];
+
+        foreach ($destinations as $d) {
+            Tujuan::firstOrCreate(
+                ['nama_tujuan' => $d['nama_tujuan']],
+                [
+                    'kota' => $d['kota'],
+                    'negara' => $d['negara'],
+                ]
+            );
+        }
     }
 }

@@ -14,19 +14,27 @@ class SettlementSeeder extends Seeder
      */
     public function run(): void
     {
-        $pengajuan = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202609/0001')->first();
+        $p1 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202609/0001')->first();
+        $p3 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202610/0003')->first();
 
-        if (! $pengajuan) {
-            return;
+        if ($p1) {
+            Settlement::updateOrCreate(
+                ['id_pengajuan' => $p1->id_pengajuan],
+                [
+                    'status' => SettlementStatusEnum::DIAJUKAN->value,
+                    'total_realisasi' => 4200000.00,
+                ]
+            );
         }
 
-        Settlement::firstOrCreate(
-            ['id_pengajuan' => $pengajuan->id_pengajuan],
-            [
-                'id_pengajuan' => $pengajuan->id_pengajuan,
-                'status' => SettlementStatusEnum::DIAJUKAN->value,
-                'total_realisasi' => 3450000.00,
-            ]
-        );
+        if ($p3) {
+            Settlement::updateOrCreate(
+                ['id_pengajuan' => $p3->id_pengajuan],
+                [
+                    'status' => SettlementStatusEnum::SELESAI->value,
+                    'total_realisasi' => 1500000.00,
+                ]
+            );
+        }
     }
 }

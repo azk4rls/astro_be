@@ -12,12 +12,16 @@ class DepartemenSeeder extends Seeder
      */
     public function run(): void
     {
-        Departemen::firstOrCreate(
-            ['nama_departemen' => 'Teknologi Informasi']
-        );
+        $departemen = [
+            'Teknologi Informasi',
+            'Keuangan & Akuntansi',
+            'Operasional Bisnis',
+            'Sumber Daya Manusia',
+            'Manajemen Proyek',
+        ];
 
-        Departemen::firstOrCreate(
-            ['nama_departemen' => 'Keuangan']
-        );
+        foreach ($departemen as $nama) {
+            Departemen::firstOrCreate(['nama_departemen' => $nama]);
+        }
     }
 }

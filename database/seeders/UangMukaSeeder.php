@@ -15,7 +15,9 @@ class UangMukaSeeder extends Seeder
     public function run(): void
     {
         $pengajuan1 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202609/0001')->first();
-        $pengajuan2 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202609/0002')->first();
+        $pengajuan2 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202610/0002')->first();
+        $pengajuan3 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202610/0003')->first();
+        $pengajuan4 = PengajuanPerjalananTugas::where('nomor_pengajuan', 'TRV/202610/0004')->first();
 
         $items = [];
 
@@ -35,7 +37,27 @@ class UangMukaSeeder extends Seeder
                 'diajukan' => 2000000.00,
                 'disetujui' => 0.00,
                 'status' => FundStatusEnum::DIAJUKAN->value,
-                'tanggal' => '2026-10-01',
+                'tanggal' => '2026-10-14',
+            ];
+        }
+
+        if ($pengajuan3) {
+            $items[] = [
+                'id_pengajuan' => $pengajuan3->id_pengajuan,
+                'diajukan' => 1500000.00,
+                'disetujui' => 1500000.00,
+                'status' => FundStatusEnum::DICAIRKAN->value,
+                'tanggal' => '2026-09-29',
+            ];
+        }
+
+        if ($pengajuan4) {
+            $items[] = [
+                'id_pengajuan' => $pengajuan4->id_pengajuan,
+                'diajukan' => 2500000.00,
+                'disetujui' => 2500000.00,
+                'status' => FundStatusEnum::DICAIRKAN->value,
+                'tanggal' => '2026-10-18',
             ];
         }
 

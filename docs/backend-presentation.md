@@ -141,7 +141,7 @@ Presentasi ini dirancang khusus untuk audience siswa SMK Rekayasa Perangkat Luna
     1. 28 tabel migrasi MySQL terpasang persisten.
     2. Endpoint `/api/dashboard/stats` dan `/api/dashboard/ringkasan` menghitung data secara real-time dari tabel database.
     3. Endpoint `/api/laporan/*` menyediakan filter rentang tanggal, kategori, dan agregat nilai rata-rata dinamis.
-    4. Antarmuka `/` (`welcome.blade.php`) diubah menjadi Live Interactive Portal yang langsung memanggil API dan menampilkan data riil tabel database.
+    4. Antarmuka web UI dihilangkan sepenuhnya (Pure Headless REST API), root `/` mengembalikan indeks JSON metadata layanan, dan database MySQL dipopulasikan 100% data korporat riil.
 - **Zero Mock / Zero Fallback Palsu:**
   - Saat database kosong, API mengembalikan count `0` dan array `[]` (bukan data rekayasa).
   - Saat data baru dimasukkan, angka statistik langsung ter-update otomatis.
