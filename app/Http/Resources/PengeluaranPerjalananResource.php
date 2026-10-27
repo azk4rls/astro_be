@@ -27,6 +27,7 @@ class PengeluaranPerjalananResource extends JsonResource
             'jumlah' => (float) $this->jumlah,
             'metode_pembayaran' => $this->metode_pembayaran,
             'sudah_diganti' => (bool) $this->sudah_diganti,
+            'bukti_struk' => BuktiStrukResource::collection($this->whenLoaded('buktiStruk')),
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),
         ];
