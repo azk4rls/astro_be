@@ -3,12 +3,14 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\BuktiStrukController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\DelegasiController;
 use App\Http\Controllers\Api\DepartemenController;
 use App\Http\Controllers\Api\DokumenPendukungController;
 use App\Http\Controllers\Api\ItineraryController;
 use App\Http\Controllers\Api\KaryawanController;
 use App\Http\Controllers\Api\KategoriPengeluaranController;
+use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\LogAuditController;
 use App\Http\Controllers\Api\NotifikasiController;
 use App\Http\Controllers\Api\PengajuanPenggantianController;
@@ -103,4 +105,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // Modul 13: Settlement
     Route::patch('settlement/{id}/status', [SettlementController::class, 'updateStatus']);
     Route::apiResource('settlement', SettlementController::class);
+
+    // Modul 14: Dashboard & Statistik Dinamis
+    Route::get('dashboard/stats', [DashboardController::class, 'stats']);
+    Route::get('dashboard/ringkasan', [DashboardController::class, 'ringkasan']);
+
+    // Modul 15: Laporan Dinamis
+    Route::get('laporan/pengeluaran', [LaporanController::class, 'pengeluaran']);
+    Route::get('laporan/perjalanan', [LaporanController::class, 'perjalanan']);
+    Route::get('laporan/reimbursement', [LaporanController::class, 'reimbursement']);
 });

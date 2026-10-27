@@ -7,15 +7,38 @@ use App\Http\Requests\PengeluaranPerjalanan\UpdatePengeluaranPerjalananRequest;
 use App\Http\Resources\PengeluaranPerjalananResource;
 use App\Models\PengeluaranPerjalanan;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PengeluaranPerjalananController extends BaseApiController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with optional filters.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $pengeluaran = PengeluaranPerjalanan::with('kategori')->get();
+        $query = PengeluaranPerjalanan::with(['kategori', 'buktiStruk']);
+
+        if ($request->filled('id_pengajuan')) {
+            $query->where('id_pengajuan', $request->integer('id_pengajuan'));
+        }
+
+        if ($request->filled('id_kategori')) {
+            $query->where('id_kategori', $request->integer('id_kategori'));
+        }
+
+        if ($request->has('sudah_diganti') && $request->get('sudah_diganti') !== null && $request->get('sudah_diganti') !== '') {
+            $query->where('sudah_diganti', filter_var($request->get('sudah_diganti'), FILTER_VALIDATE_BOOLEAN));
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->get('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('deskripsi', 'like', "%{$search}%")
+                    ->orWhere('metode_pembayaran', 'like', "%{$search}%");
+            });
+        }
+
+        $pengeluaran = $query->orderByDesc('tanggal_pengeluaran')->get();
 
         return $this->sendSuccess(
             'Daftar pengeluaran perjalanan berhasil diambil.',

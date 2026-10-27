@@ -103,4 +103,36 @@ class PengajuanPerjalananTugas extends Model
     {
         return $this->hasMany(DokumenPendukung::class, 'id_pengajuan', 'id_pengajuan');
     }
+
+    /**
+     * Relasi ke Itinerary (One-to-Many).
+     */
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itinerary::class, 'id_pengajuan', 'id_pengajuan');
+    }
+
+    /**
+     * Relasi ke Booking (One-to-Many).
+     */
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class, 'id_pengajuan', 'id_pengajuan');
+    }
+
+    /**
+     * Relasi ke UangMuka (One-to-Many).
+     */
+    public function uangMuka(): HasMany
+    {
+        return $this->hasMany(UangMuka::class, 'id_pengajuan', 'id_pengajuan');
+    }
+
+    /**
+     * Relasi ke Settlement (One-to-Many).
+     */
+    public function settlements(): HasMany
+    {
+        return $this->hasMany(Settlement::class, 'id_pengajuan', 'id_pengajuan');
+    }
 }
